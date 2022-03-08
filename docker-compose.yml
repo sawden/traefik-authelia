@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  authelia:
+    image: authelia/authelia
+    container_name: authelia
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./data:/config
+    networks:
+      - traefik
+    environment:
+      - TZ=Europe/Berlin
+      - AUTHELIA_JWT_SECRET_FILE=/run/secrets/authelia_jwt_secret
+      - AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/authelia_storage_encryption_key
+      - AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE=/run/secrets/authelia_notifier_smtp_password
+    secrets:
+      - authelia_jwt_secret
+      - authelia_storage_encryption_key
+      - authelia_notifier_smtp_password
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.authelia.rule=Host(`${HOSTNAME}`)'
+      - 'traefik.http.routers.authelia.entrypoints=websecure'
+      - 'traefik.http.routers.authelia.tls=true'
+      - "traefik.http.routers.authelia.middlewares=chain-auth@file"
+      - "traefik.http.routers.authelia.tls.certresolver=cloudflare"
+    expose:
+      - 9091
+networks:
+  traefik:
+    external: true
+secrets:
+  authelia_jwt_secret:
+    file: ./secrets/authelia_jwt_secret
+  authelia_storage_encryption_key:
+    file: ./secrets/authelia_storage_encryption_key
+  authelia_notifier_smtp_password:
+    file: ./secrets/authelia_notifier_smtp_password

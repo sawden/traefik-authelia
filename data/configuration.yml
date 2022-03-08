@@ -1,0 +1,65 @@
+---
+###############################################################
+#                   Authelia configuration                    #
+###############################################################
+server:
+  host: 0.0.0.0
+  port: 9091
+
+theme: dark
+# jwt_secret: STORED IN SECRETS
+
+totp:
+  issuer: authelia.com
+  period: 30
+  skew: 1
+
+log:
+  level: warn
+  format: text
+  file_path: /config/authelia.log
+
+authentication_backend:
+  disable_reset_password: true
+  file:
+    path: /config/users_database.yml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      salt_length: 16
+      parallelism: 8
+      memory: 1024
+
+access_control:
+  default_policy: bypass
+  rules:
+    # your-domain.com
+    - domain: your-domain.com
+      policy: two_factor
+    # sub.your-domain.com
+    - domain: sub.your-domain.com
+      policy: one_factor
+session:
+  domain: your-domain.com # Should match whatever your root protected domain is
+  expiration: 3600 # 1 hour
+  inactivity: 900 # 15 minutes
+
+# Built-in brute-force protection
+regulation:
+  max_retries: 3
+  find_time: 2m
+  ban_time: 10m
+
+storage:
+  # encryption_key: STORED IN SECRETS
+  local:
+    path: /config/db.sqlite3
+
+notifier:
+  smtp:
+    username: info@your-domain.com
+    # password: STORED IN SECRETS
+    host: smtp.hostinger.com
+    port: 587
+    sender: auth@your-domain.com
+...
