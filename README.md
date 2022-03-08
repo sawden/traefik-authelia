@@ -30,7 +30,7 @@ nano /opt/containers/authelia/data/configuration.yml
 echo "" > "/opt/containers/authelia/data/authelia.log"
 # Create a 'secrets' folder.
 mkdir /opt/containers/authelia/secrets/
-# Create all required secrets. You can generate JWT secrets using [this](https://www.grc.com/passwords.htm) website.
+# Create all required secrets. You can generate JWT secrets using this website: https://www.grc.com/passwords.htm
 echo "YOUR_YWT_SECRET" > "/opt/containers/authelia/secrets/authelia_jwt_secret"
 echo "YOUR_ENCRYPTION_KEY" > "/opt/containers/authelia/secrets/authelia_storage_encryption_key"
 echo "YOUR_SMTP_PASSWORD" > "/opt/containers/authelia/secrets/authelia_notifier_smtp_password"
