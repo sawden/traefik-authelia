@@ -11,7 +11,7 @@ users:
     displayname: "John Doe"
     # Generate password hash with: docker run authelia/authelia:latest authelia hash-password 'yourpassword'
     password: "HASHED_PASSWORD"
-    email: j.doe@your-domain.com
+    email: mail@exampe.com
     groups:
       - admins
       - dev

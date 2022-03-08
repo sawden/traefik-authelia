@@ -24,7 +24,7 @@ This guide assumes that docker uses the user and group 'traefik' through userns-
 
 ## Config and start authelia
 ```bash
-# Adjust the configuration for all options with the placeholder 'your-domain.com'
+# Adjust the configuration for all options with the placeholder 'exampe.com'
 nano /opt/containers/authelia/data/configuration.yml
 # Create the log file 
 echo "" > "/opt/containers/authelia/data/authelia.log"
@@ -43,7 +43,7 @@ cp /opt/containers/authelia/.env.dist /opt/containers/authelia/.env
 nano /opt/containers/authelia/.env
 # Add users to 'users_database.yml' and remove the demo 'johndoe' user
 nano /opt/containers/authelia/data/users_database.yml
-# Chnage the permissions of the 'data' folder
+# Change the permissions of the 'data' folder to the docker remap user
 sudo chown -R traefik:traefik /opt/containers/authelia/data
 # Start 🚀 the container
 docker-compose up -d

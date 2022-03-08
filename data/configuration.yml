@@ -33,14 +33,14 @@ authentication_backend:
 access_control:
   default_policy: bypass
   rules:
-    # your-domain.com
-    - domain: your-domain.com
+    # exampe.com
+    - domain: exampe.com
       policy: two_factor
-    # sub.your-domain.com
-    - domain: sub.your-domain.com
+    # sub.exampe.com
+    - domain: sub.exampe.com
       policy: one_factor
 session:
-  domain: your-domain.com # Should match whatever your root protected domain is
+  domain: exampe.com # Should match whatever your root protected domain is
   expiration: 3600 # 1 hour
   inactivity: 900 # 15 minutes
 
@@ -57,9 +57,9 @@ storage:
 
 notifier:
   smtp:
-    username: info@your-domain.com
+    username: info@exampe.com
     # password: STORED IN SECRETS
     host: smtp.hostinger.com
     port: 587
-    sender: auth@your-domain.com
+    sender: auth@exampe.com
 ...
