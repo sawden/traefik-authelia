@@ -18,7 +18,7 @@ git clone https://github.com/sawden/traefik-authelia.git /opt/containers/autheli
 ---
 **IMPORTANT**
 
-This guide assumes that docker uses the user and group 'traefik' through userns-remap.
+This guide assumes that docker uses the user and group 'traefik' through [userns-remap](https://docs.docker.com/engine/security/userns-remap/#enable-userns-remap-on-the-daemon).
 
 ---
 
